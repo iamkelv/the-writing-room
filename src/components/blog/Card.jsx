@@ -8,18 +8,17 @@ import {
   AiOutlineComment,
   AiOutlineShareAlt,
 } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export const Card = () => {
+  const navigate = useNavigate()
   const [post, setPost] = useState([])
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setPost(data)
-        console.log(post)
       })
   }, [])
 

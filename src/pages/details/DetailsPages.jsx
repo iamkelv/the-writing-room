@@ -10,9 +10,11 @@ import { blog } from '../../assets/data/data'
 import { Header } from '../../components/header/Header'
 
 export const DetailsPages = () => {
-  const { id } = useParams()
+  const [isDelete, setIsDeleting] = useState(false)
   const [blogs, setBlogs] = useState(null)
   const navigate = useNavigate()
+
+  const { id } = useParams()
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -24,6 +26,23 @@ export const DetailsPages = () => {
     //   setBlogs(blogs)
     // }
   }, [])
+
+  const handleDelete = async () => {
+    setIsDeleting(true)
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`,
+      {
+        method: 'DELETE',
+      },
+    ).then((res) => {
+      if (res.ok) {
+        return res
+      }
+    })
+    const data = await res.json()
+    setIsDeleting(false)
+  }
+
   const handlerEdit = () => {
     navigate(`/edit/${id}`)
   }
@@ -41,8 +60,8 @@ export const DetailsPages = () => {
                 <button className="button" onClick={handlerEdit}>
                   <BsPencilSquare />
                 </button>
-                <button className="button">
-                  <AiOutlineDelete />
+                <button className="button" onClick={handleDelete}>
+                  {isDelete ? 'Deleting' : <AiOutlineDelete />}
                 </button>
               </div>
               <h1>Betadine Feminine Wash</h1>

@@ -40,3 +40,34 @@
   z-index: 1;
   border-radius: 5px;
 }
+
+
+.success{
+  font-size:large;
+  transform: translateX(50%);
+  animation:pop 0.5s ease-in-out forwards
+}
+
+.success .hide{
+  display: none;
+}
+@keyframes pop {
+  0%{
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  30%{
+    opacity: 0.4;
+    transform: translateX(30%);
+  }
+  70%{
+    opacity: 0.8;
+    transform: translateX(10%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  
+  
+}
