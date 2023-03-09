@@ -1,18 +1,28 @@
-import React, { useState } from "react";
-import { IoSettingsOutline } from "react-icons/io5";
-import { BsBagCheck } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
-import { GrHelp } from "react-icons/gr";
-import { BiLogOut } from "react-icons/bi";
-import { RiImageAddLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { IoSettingsOutline } from 'react-icons/io5'
+import { BsBagCheck } from 'react-icons/bs'
+import { AiOutlineHeart } from 'react-icons/ai'
+import { GrHelp } from 'react-icons/gr'
+import { BiLogOut } from 'react-icons/bi'
+import { RiImageAddLine } from 'react-icons/ri'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { authSliceAction } from '../../store/slices/auth-slice'
 
 export const User = () => {
-  const user = true;
-  const [profileOpen, setProfileOpen] = useState(false);
+  const dispatch = useDispatch()
+
+  const user = true
+  const [profileOpen, setProfileOpen] = useState(false)
+
   const close = () => {
-    setProfileOpen(false);
-  };
+    setProfileOpen(false)
+  }
+  const handleLogout = () => {
+    dispatch(authSliceAction.logout())
+
+    // <Redirect to='/' />
+  }
   return (
     <>
       <div className="profile">
@@ -23,7 +33,7 @@ export const User = () => {
               onClick={() => setProfileOpen(!profileOpen)}
             >
               <img
-                src="https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&w=600"
+                src="https://avatars.githubusercontent.com/u/99442773?v=4"
                 alt=""
               />
             </button>
@@ -33,7 +43,7 @@ export const User = () => {
                   <div className="image">
                     <div className="img">
                       <img
-                        src="https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        src="https://avatars.githubusercontent.com/u/99442773?v=4"
                         alt=""
                       />
                     </div>
@@ -49,13 +59,13 @@ export const User = () => {
                     <h4>Create Post</h4>
                   </button>
                 </Link>
-                <Link to="/login">
+                <Link to="/account">
                   <button className="box">
                     <IoSettingsOutline className="icon" />
                     <h4>My Account</h4>
                   </button>
                 </Link>
-                <button className="box">
+                <button className="box" onClick={handleLogout}>
                   <BiLogOut className="icon" />
                   <h4>Log Out</h4>
                 </button>
@@ -67,5 +77,5 @@ export const User = () => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
