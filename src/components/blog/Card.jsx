@@ -26,7 +26,7 @@ export const Card = () => {
     <>
       <section className="blog">
         <div className="container  grid3 grid  grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 ">
-          {post.map((item) => (
+          {post.slice(0, 20).map((item) => (
             <div className="box boxItems" key={item.id}>
               <div className="img">
                 <img src={b1} alt="" />

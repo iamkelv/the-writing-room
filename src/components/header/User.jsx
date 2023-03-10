@@ -48,7 +48,7 @@ export const User = () => {
                       />
                     </div>
                     <div className="text">
-                      <h4>name</h4>
+                      <h4>Shedrach</h4>
                       <label></label>
                     </div>
                   </div>

@@ -64,13 +64,18 @@ export const UpdatePost = () => {
     <>
       <Header />
       <section className="newPost relative">
-        <span
-          className={` ${
-            succes ? 'success' : 'success hide'
-          } absolute flex bg-green-400 text-white p-2 rounded-lg right-3`}
-        >
-          Article Updated Successfully
-        </span>
+        {succes ? (
+          <span
+            className={` ${
+              succes ? 'success' : 'success hide'
+            } absolute flex bg-green-400 text-white p-2 rounded-lg right-3`}
+          >
+            Article Updated Successfully
+          </span>
+        ) : (
+          ''
+        )}
+
         <div className="container boxItems ">
           <div className="img ">
             <img

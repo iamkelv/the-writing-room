@@ -12,11 +12,19 @@ import { Header } from '../../components/header/Header'
 export const DetailsPages = () => {
   const [isDelete, setIsDeleting] = useState(false)
   const [blogs, setBlogs] = useState(null)
+  const [comment, setComment] = useState([])
   const navigate = useNavigate()
 
   const { id } = useParams()
 
   useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setComment(data)
+      })
+
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
       .then((response) => response.json())
       .then((data) => setBlogs(data))
@@ -36,11 +44,13 @@ export const DetailsPages = () => {
       },
     ).then((res) => {
       if (res.ok) {
+        alert('Article Deleted')
         return res
       }
     })
     const data = await res.json()
     setIsDeleting(false)
+    navigate('/')
   }
 
   const handlerEdit = () => {
@@ -99,7 +109,23 @@ export const DetailsPages = () => {
                 ut aut reiciendis voluptatibus maiores alias consequatur aut
                 perferendis doloribus asperiores repellat."
               </p>
-              <p>Author: Sunil</p>
+              <p>Author: Shadrach</p>
+
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xl">Comments</h2>
+                {comment.map((com) => (
+                  <div className="flex gap-2 w-[70%] p-2" key={com.postId}>
+                    <span className="flex-1 w-[100px] flex flex-col">
+                      <span>{com.name.slice(0, 1)}</span>
+                      <span>user</span>
+                    </span>
+                    <span className="flex-6 flex gap-2 flex-col p-1 rounded-md bg-gray-200 justify-start items-start w-full">
+                      <span>{com.name}</span>
+                      <span>{com.body}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
